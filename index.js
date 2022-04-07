@@ -19,7 +19,7 @@ if (!config.enable) {
   return;
 }
 
-hexo.extend.generator.register('og_image', locals => {
+hexo.extend.generator.register('asset', locals => {
     return ogimage.call(hexo, locals);
-  });
+});
 
