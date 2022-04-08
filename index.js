@@ -23,7 +23,13 @@ hexo.extend.generator.register('opengraph_image', locals => {
 });
 
 hexo.extend.helper.register('opengraph_image', function(){
-    const url_for = hexo.extend.helper.get('url_for').bind(hexo);
-    const is_post = hexo.extend.helper.get('is_post').bind(hexo);
-    return '<meta property="og:image" content="https://cdn.patrickwu.space/base/social.png" />';
+    if (this.is_post() ) {
+        let url_path = "";
+        if (this.page.thumbnail) {
+            url_path = this.full_url_for(this.page.thumbnail);
+        } else {
+            url_path = this.full_url_for(this.path).replace(/index\.html$/, "") +'thumbnail.png';
+        }
+        return '<meta property="og:image" content="' + url_path + '" />';
+    }
 });
